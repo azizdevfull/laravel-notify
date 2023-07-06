@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     Route::post('/products', [ProductController::class, 'store']);
     Route::apiResource('products.comments', CommentController::class);
+    Route::get('/notifications', [NotificationsController::class, 'index']);
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

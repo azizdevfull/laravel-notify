@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Notifications\NewCommentNotification;
 
 class CommentController extends Controller
 {
@@ -34,6 +35,10 @@ class CommentController extends Controller
             'product_id' => $product->id,
             'body' => $request->body
         ]);
+        // dd($product->user);
+        if(Auth::user()->id != $product->user->id) {
+            $product->user->notify(new NewCommentNotification($comment));
+        }
 
         return response()->json([
             'message' => 'Comment created successfully!',
