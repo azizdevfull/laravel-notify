@@ -27,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/products', [ProductController::class, 'store']);
     Route::apiResource('products.comments', CommentController::class);
     Route::get('/notifications', [NotificationsController::class, 'index']);
+    Route::get('/read-notifications', [NotificationsController::class, 'readNotifications']);
+    Route::get('/unread-notifications', [NotificationsController::class, 'unReadNotifications']);
+    Route::get('/notifications/{id}/read', [NotificationsController::class, 'markRead']);
 
 });
 
